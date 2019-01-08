@@ -13,12 +13,10 @@ namespace Oxide.Plugins
         {
             if (Friends == null)
             {
-                return true; //Friends API Missing, default to true
+                return true;
             }
             
             string authLevel = ServerUsers.Get(target.userID)?.group.ToString() ?? "None";
-            //uMod Sucks and does not support IsAdmin on Rust
-            //So we check it and still check the manual way
             if(looter.IsAdmin || authLevel.ToUpper() == "OWNER") {
                 return true;
             }
