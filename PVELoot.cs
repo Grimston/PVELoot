@@ -2,7 +2,7 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("PVE Loot", "Grimston", "0.1.0")]
+    [Info("PVE Loot", "Grimston", "0.1.1")]
     [Description("Blocks players looting other players unless they are friends.")]
     class PVELoot : CovalencePlugin
     {
@@ -17,7 +17,7 @@ namespace Oxide.Plugins
             }
             
             string authLevel = ServerUsers.Get(target.userID)?.group.ToString() ?? "None";
-            if(looter.IsAdmin || authLevel.ToUpper() == "OWNER") {
+            if(looter.IsAdmin || authLevel.ToUpper() == "OWNER" || authLevel.ToUpper() == "MOD") { //Need to test MOD
                 return true;
             }
             
