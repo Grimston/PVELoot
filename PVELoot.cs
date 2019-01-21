@@ -2,14 +2,14 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("PVE Loot", "Grimston", "0.1.2")]
+    [Info("PVE Loot", "Grimston", "0.1.3")]
     [Description("Blocks players looting other players unless they are friends.")]
     class PVELoot : CovalencePlugin
     {
         [PluginReference]
         private Plugin Friends;
 
-        bool CanLootPlayer(BasePlayer looter, BasePlayer target)
+        bool CanLootPlayer(BasePlayer target, BasePlayer looter)
         {
             if (Friends == null)
             {
