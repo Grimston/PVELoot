@@ -2,8 +2,8 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("PVE Loot", "Grimston", "0.1.3")]
-    [Description("Blocks players looting other players unless they are friends.")]
+    [Info("PVE Loot", "Grimston", "0.1.4")]
+    [Description("Blocks players looting other players unless they are friends or an admin/mod")]
     class PVELoot : CovalencePlugin
     {
         [PluginReference]
@@ -11,13 +11,9 @@ namespace Oxide.Plugins
 
         bool CanLootPlayer(BasePlayer target, BasePlayer looter)
         {
-            if (Friends == null)
+            //Check if we have Friends plugin and then if admin or mod
+            if (Friends == null || (ServerUsers.Is(looter.userID, ServerUsers.UserGroup.Owner) || ServerUsers.Is(looter.userID, ServerUsers.UserGroup.Moderator)))
             {
-                return true;
-            }
-            
-            //Check if admin or mod
-            if(ServerUsers.Is(looter.userID, ServerUsers.UserGroup.Owner) || ServerUsers.Is(looter.userID, ServerUsers.UserGroup.Moderator)) {
                 return true;
             }
             
